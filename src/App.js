@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import FlashCards from "./components/FlashCards";
+import { Container, Header, } from "semantic-ui-react";
+import FlashCardForm from "./components/FlashCardForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    flash_cards: [
+      { id: 1, front: "What is a state?", back: "A plain javascript object that we can store properties in.", },
+      { id: 2, front: "What is MVC?", back: "Models, Views, Controllers", },
+      { id: 3, front: "What can't be an object?", back: "You can't render an Object as a child", },
+    ],
+    showForm = false
+  };
+
+  getId = () => Math.floor((1 + Math.random()) * 10000);
+
+  addCard = (cardDate) => {
+    const cards = this.state.cards.map( card => {
+      return { id: this.this.getId(), ...cardData, }
+    })
+    const cards = { id: this.getId(), ...cardData, }
+    this.setState({ cards, ...this.state.cards })
+  };
+
+  toggleForm = () => {
+    this.state({  })
+  };
+
+  render() {
+    return (
+      <Container style={styles.container}>
+        <Header as="h1">Flash Cards</Header>
+        <br />
+        <Button onClick={this.toggleForm}>Toggle Form</Button>
+        <br />
+        <FlashCards flashcards={this.state.cards} />
+      </Container>
+    );
+  }
 }
+
+const styles = {
+  container: {
+    marginTop: "25px"
+  }
+};
 
 export default App;
